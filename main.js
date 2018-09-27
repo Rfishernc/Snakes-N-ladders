@@ -96,12 +96,18 @@ function writeToDom(div, string) {
     document.getElementById(div).innerHTML = string;
 }
 
+function addToDom(div, string) {
+    document.getElementById(div).innerHTML += string;
+}
+
 function newGame() {
     document.getElementById('newGame').addEventListener('click', function() {
         gameCounter++;
         turnCounter = 0;
         window['game' + gameCounter] = new SnakesLadders();
         writeToDom('mainDiv', `<p>You are playing game ${gameCounter}</p>`);
+        addToDom('boardDiv', `<img src='boardMarker1.png' id='marker1'>`);
+        addToDom('boardDiv', `<img src='boardMarker2.png' id='marker2'>`)
     })
 }
 

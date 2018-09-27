@@ -14,11 +14,16 @@ button {
     max-width: 5%;
 }
 
-#board {
-    max-width: 50%;
+#boardDiv {
+    position: relative;
+    width: 564px;
+    height: 564px;
 }
-
 #marker1, #marker2 {
+    position: absolute;
+    bottom: 14px;
+    left: -28px;
     width: 28px;
     height: 28px;
+    z-index: 5000;
 }

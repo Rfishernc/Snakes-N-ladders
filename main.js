@@ -106,8 +106,10 @@ function newGame() {
         turnCounter = 0;
         window['game' + gameCounter] = new SnakesLadders();
         writeToDom('mainDiv', `<p>You are playing game ${gameCounter}</p>`);
-        addToDom('boardDiv', `<img src='boardMarker1.png' id='marker1'>`);
-        addToDom('boardDiv', `<img src='boardMarker2.png' id='marker2'>`)
+        if(gameCounter === 1) {
+            addToDom('boardDiv', `<img src='boardMark1.png' id='marker1'>`);
+            addToDom('boardDiv', `<img src='boardMark2.png' id='marker2'>`);
+        }
     })
 }
 

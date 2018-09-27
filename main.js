@@ -1,12 +1,26 @@
+// things to do:
+// add bounce off of finish line 
+// add dice roll display
+// make board position display function
+// make square positions
+
+
 const laddersStart = [2, 7, 8, 15, 21, 28, 36, 51, 71, 78, 87];
 const laddersEnd = [38, 14, 31, 26, 42, 84, 44, 67, 91, 98, 94];
 const snakesStart = [99, 95, 92, 89, 74, 64, 62, 49, 46, 16];
 const snakesEnd = [80, 75, 88, 68, 53, 60, 19, 11, 25, 6];
 
+const boardSquare = [];
+
 let die1;
 let die2;
 let gameCounter = 0;
 let turnCounter = 0;
+let dieString;
+
+// function setBoardSquare() {
+//     boardSquare.push({x: ,y:})
+// }
 
 class SnakesLadders {
     activePlayer() {
@@ -20,6 +34,13 @@ class SnakesLadders {
     
     roll() {
         this.dieRoll = this.die1 + this.die2;
+        dieString = '';
+        dieString += `<div id='dieDiv'>`
+        dieString +=    `<p>Current Roll:</p>`
+        dieString +=    `<img src='dice${this.die1}.png'>`
+        dieString +=    `<img src='dice${this.die2}.png'>`
+        dieString += `</div>`
+        writeToDom('dies', dieString);
     }
 
     player1() { 
@@ -69,26 +90,25 @@ class SnakesLadders {
         else {
             this.activePlayer();
             this.roll();
-        if(this.player === 1) {
-            if(this.positionP1 === 100) {
-                alert('Player 1 wins');
-            }
+            if(this.player === 1) {
+                if(this.positionP1 === 100) {
+                    alert('Player 1 wins');
+                }
+                else {
+                    this.player1();
+                    alert('Player 1 is on square ' + this.positionP1);
+                }
+            }   
             else {
-                this.player1();
-                alert('Player 1 is on square ' + this.positionP1);
+                if(this.positionP2 === 100) {
+                    alert('Player 2 wins');
+                }
+                else {
+                    this.player2();
+                    alert('Player 2 is on square ' + this.positionP2);
+                }
             }
-        }
-        else {
-            if(this.positionP2 === 100) {
-                alert('Player 2 wins');
-            }
-            else {
-                this.player2();
-                alert('Player 2 is on square ' + this.positionP2);
-            }
-        }
-        }
-        
+        }        
     }  
 }
 
@@ -118,7 +138,13 @@ function newRoll(game) {
     die1 = (Math.floor(Math.random() * 6) + 1);
     die2 = (Math.floor(Math.random() * 6) + 1);
     game.play(die1, die2);
-    writeToDom('turnDiv', `<p>You are on turn ${turnCounter}</p>`)
+    writeToDom('turnDiv', `<p>You are on turn ${turnCounter}</p>`);
+    if(window['game' + gameCounter].player === 1) {
+        addToDom('turnDiv', `<p>Player 2 is up next.</p>`);
+    }
+    else {
+        addToDom('turnDiv', `<p>Player 1 is up next.</p>`);
+    }
 }
 
 function pressedPlay() {

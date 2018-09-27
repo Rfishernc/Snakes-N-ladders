@@ -27,3 +27,18 @@ button {
     height: 28px;
     z-index: 5000;
 }
+
+#dieDiv {
+    display: flex;
+    flex-flow: row;
+}
+
+.dice {
+    width: 80px;
+    height: 80px;
+}
+
+#rollPar {
+    margin-top: 30px;
+    margin-left: -84px;
+}

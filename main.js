@@ -1,6 +1,5 @@
 // things to do:
 // add bounce off of finish line 
-// add dice roll display
 // make board position display function
 // make square positions
 
@@ -23,6 +22,11 @@ let dieString;
 // }
 
 class SnakesLadders {
+    firstTurn() { 
+        this.positionP1 = 0;
+        this.positionP2 = 0;
+    }
+
     activePlayer() {
         if(this.player === 1) {
             this.player = 2;
@@ -36,54 +40,45 @@ class SnakesLadders {
         this.dieRoll = this.die1 + this.die2;
         dieString = '';
         dieString += `<div id='dieDiv'>`
-        dieString +=    `<p>Current Roll:</p>`
-        dieString +=    `<img src='dice${this.die1}.png'>`
-        dieString +=    `<img src='dice${this.die2}.png'>`
+        dieString +=    `<p id='rollPar'>Current Roll:</p>`
+        dieString +=    `<img src='dice${this.die1}.png' class='dice'>`
+        dieString +=    `<img src='dice${this.die2}.png' class='dice'>`
         dieString += `</div>`
         writeToDom('dies', dieString);
     }
 
     player1() { 
-        if(turnCounter === 1) {
-            this.positionP1 = 0;
-        }
-        else {
-            this.positionP1 = this.positionP1 + this.dieRoll;
-            for(let i = 0; i < laddersStart.length; i++) {
-                if(this.positionP1 === laddersStart[i]) {
-                    this.positionP1 = laddersEnd[i];
-                }
+        this.positionP1 = this.positionP1 + this.dieRoll;
+        for(let i = 0; i < laddersStart.length; i++) {
+            if(this.positionP1 === laddersStart[i]) {
+                this.positionP1 = laddersEnd[i];
             }
-            for(let i = 0; i < snakesStart.length; i++) {
-                if(this.positionP1 === snakesStart[i]) {
-                    this.positionP1 = snakesEnd[i];
-                }
+        }
+        for(let i = 0; i < snakesStart.length; i++) {
+            if(this.positionP1 === snakesStart[i]) {
+                this.positionP1 = snakesEnd[i];
             }
         }
     }
-
     player2() {
-        if(turnCounter === 2) {
-            this.positionP2 = 0;
-        }
-        else {
-            this.positionP2 = this.positionP2 + this.dieRoll;
-            for(let i = 0; i < laddersStart.length; i++) {
-                if(this.positionP2 === laddersStart[i]) {
-                    this.positionP2 = laddersEnd[i];
-                }
+        this.positionP2 = this.positionP2 + this.dieRoll;
+        for(let i = 0; i < laddersStart.length; i++) {
+            if(this.positionP2 === laddersStart[i]) {
+                this.positionP2 = laddersEnd[i];
             }
-            for(let i = 0; i < snakesStart.length; i++) {
-                if(this.positionP2 === snakesStart[i]) {
-                    this.positionP2 = snakesEnd[i];
-                }
+        }
+        for(let i = 0; i < snakesStart.length; i++) {
+            if(this.positionP2 === snakesStart[i]) {
+                this.positionP2 = snakesEnd[i];
             }
         }
     }
-
     play(die1, die2) {
         this.die1 = die1;
         this.die2 = die2;
+        if(turnCounter === 1) {
+            this.firstTurn();
+        }
         if(this.positionP1 === 100 || this.positionP2 === 100) {
             alert('Game Over');
         }

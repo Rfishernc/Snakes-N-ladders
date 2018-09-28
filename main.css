@@ -1,0 +1,44 @@
+body {
+    background-color: darkslateblue;
+}
+
+#container {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column;
+    align-items: center;
+}
+
+button {
+    margin: 10px;
+    max-width: 5%;
+}
+
+#boardDiv {
+    position: relative;
+    width: 564px;
+    height: 564px;
+}
+#marker1, #marker2 {
+    position: absolute;
+    bottom: 14px;
+    left: -28px;
+    width: 28px;
+    height: 28px;
+    z-index: 5000;
+}
+
+#dieDiv {
+    display: flex;
+    flex-flow: row;
+}
+
+.dice {
+    width: 80px;
+    height: 80px;
+}
+
+#rollPar {
+    margin-top: 30px;
+    margin-left: -84px;
+}

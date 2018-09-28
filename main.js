@@ -1,25 +1,55 @@
 // things to do:
 // add bounce off of finish line 
 // make board position display function
-// make square positions
 
 
 const laddersStart = [2, 7, 8, 15, 21, 28, 36, 51, 71, 78, 87];
 const laddersEnd = [38, 14, 31, 26, 42, 84, 44, 67, 91, 98, 94];
 const snakesStart = [99, 95, 92, 89, 74, 64, 62, 49, 46, 16];
 const snakesEnd = [80, 75, 88, 68, 53, 60, 19, 11, 25, 6];
-
 const boardSquare = [];
-
 let die1;
 let die2;
 let gameCounter = 0;
 let turnCounter = 0;
 let dieString;
+let x = 0;
+let y = 0;
+let direction = 0;
+let j = 0;
 
-// function setBoardSquare() {
-//     boardSquare.push({x: ,y:})
-// }
+function setBoardSquare() {
+    for(let i = 0; i < 10; i++) {
+        if(direction < 1) {
+            for(let j = 1; j < 11; j++) {
+                console.log('first loop', direction);
+                x = (j * 56.4) - 28.2;
+                y = ((i+1) * 56.4) - 28.2;
+                boardSquare.push({xPos: x, yPos: y});
+                direction++;
+            }
+        }
+        else if(direction < 11) {
+            for(let j = 10; j > 0; j--) {
+                console.log('second loop', direction);
+                x = (j * 56.4) - 28.2;
+                y = ((i+1)  * 56.4) - 28.2;
+                boardSquare.push({xPos: x, yPos: y});
+                direction++; 
+            }
+        }
+        else {
+            direction = 0;
+            for(let j = 1; j < 11; j++) {
+                console.log('first loop', direction);
+                x = (j * 56.4) - 28.2;
+                y = ((i+1) * 56.4) - 28.2;
+                boardSquare.push({xPos: x, yPos: y});
+                direction++;
+            }
+        }
+    }    
+}
 
 class SnakesLadders {
     firstTurn() { 
@@ -150,6 +180,8 @@ function pressedPlay() {
 
 newGame();
 pressedPlay();
+setBoardSquare();
+console.log(boardSquare);
 
 // ladders:
 // 2 - 38
